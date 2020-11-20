@@ -56,7 +56,7 @@ function layout(bodyMargin = 0) {
 		}
 		.control-box input[type="text"] {
 			font-size: 30pt;
-			width: calc(100% - 15px);
+			width: calc(100% - 17px);
 		}
 		#ExplainGitZen-Container .svg-container {
 			left: 0;
@@ -69,6 +69,18 @@ function layout(bodyMargin = 0) {
 			right: ${bodyMargin + 20}px;
 			cursor: pointer;
 			z-index: 2000;
+		}
+		#version {
+			position: fixed;
+			left: 10px;
+			bottom: 10px;
+			z-index: 100;
+			background-color: #DFDFDF;
+			padding: 3px 6px;
+			font-size: 10px;
+			box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.3);
+			border-radius: 100%;
+			color: gray;			
 		}
 	`;
 
@@ -97,6 +109,21 @@ function addLinkButtonToProject() {
   document.body.append(img);
 }
 
+async function addVersionStamp() {
+	var localExecution = location.href.indexOf('file://') === 0;
+	var version = "v0.0.0";
+	if (!localExecution) {
+		var response = await fetch("VERSION");
+		var text = await response.text();
+		version = text.trim().replace("#BUILD#", "x");
+	}
+	var el = document.createElement("div");
+	el.id = "version";
+	el.innerHTML = version;
+	el.title = "Version of this web app.";
+	document.body.append(el);
+}
+
 function whenErrorReloadPage() { 
 	if (document.querySelector('.control-box')) return;
 	return location.href = location.origin;
@@ -120,6 +147,7 @@ document.onreadystatechange = function () {
 		selectGitMode();
 		layout(window.margin);
 		addLinkButtonToProject();
+		addVersionStamp();
 	};
 	setTimeout(load, 1000);
 }
