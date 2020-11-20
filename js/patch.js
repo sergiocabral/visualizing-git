@@ -113,7 +113,7 @@ async function addVersionStamp() {
 	var localExecution = location.href.indexOf('file://') === 0;
 	var version = "v0.0.0";
 	if (!localExecution) {
-		var response = await fetch("VERSION");
+		var response = await fetch(location.pathname + "/VERSION");
 		var text = await response.text();
 		version = text.trim().replace("#BUILD#", "x");
 	}
@@ -126,7 +126,7 @@ async function addVersionStamp() {
 
 function whenErrorReloadPage() { 
 	if (document.querySelector('.control-box')) return;
-	return location.href = location.origin;
+	return location.href = location.origin + location.pathname + location.search;
 }
 
 function selectGitMode(mode = "free-remote") {	
