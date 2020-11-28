@@ -3,7 +3,7 @@
 Interface Web para praticar comandos do Git. Você digita e *vê* o resultado. Bem legal!
 
 Acesse:
-- [git.sergiocabral.com](https://git.sergiocabral.com/)
+- [sergiocabral.com/git](https://sergiocabral.com/git)
 - [GitHub](https://github.com/sergiocabral/App.GitPlayground)
 - [GitLab](https://gitlab.com/sergiocabral/app.gitplayground)
 - [Azure](https://dev.azure.com/sergiocabral/App.GitPlayground)
